@@ -4,8 +4,33 @@ import {useState} from 'react';
 import buildspaceLogo from '../assets/buildspace-logo.png';
 
 const Home = () => {
+
   const [userInput, setUserInput] = useState('')
-  
+  const [apiOutput, setApiOutput] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+
+  const callGeneratingEndpoint = async () => {
+    
+    setIsGenerating(true)
+    console.log("Calling OpenAPI")
+    const response = await fetch('api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({userInput})
+
+    })
+
+    const data = await response.json()
+    const { output } = data
+    console.log("OpenAI replied...", output.text)
+
+    setApiOutput(`${output.text}`)
+    setIsGenerating(false)
+
+  }
+
   const onUserChnagedText = (event) => {
     console.log(event.target.value)
     setUserInput(event.target.value)
