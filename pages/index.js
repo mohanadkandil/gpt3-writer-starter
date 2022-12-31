@@ -54,9 +54,7 @@ const Home = () => {
           <textarea placeholder='start typing here' className='prompt-box' value={userInput} onChange={onUserChnagedText} />
       </div>
     <div className='prompt-buttons'>
-    <a className='generate-button' onClick={null}>
-
-
+    <a className='generate-button' onClick={callGeneratingEndpoint}>
     <div className='generate'>
       <p>Generate</p>
     </div>
